@@ -170,7 +170,17 @@ A dead key modifies the character you have **just typed**. Type the base letter 
 | `a` `"` | ä      |
 | `s` `!` | ß      |
 
-The available dead keys are `"` `'` `` ` `` `^` `~` `°` `˘` `ˇ` `-` `!` `$` `?` `*`. Following a dead key with a space types the mark itself.
+Following a dead key with a space types the mark itself.
+
+Ten of them are accents: `"` `'` `` ` `` `^` `~` `°` `˘` `ˇ` `-` and, on Japanese layouts, `゛`. The remaining four produce characters that are not accented letters at all, and are easy to miss because their labels do not look like marks:
+
+| Key     | Produces                          | Examples                                               |
+| ------- | --------------------------------- | ------------------------------------------------------ |
+| `¿¡`    | ligatures and Spanish punctuation | `a`→æ, `o`→œ, `s`→ß, `c`→ç, `l`→ł, `!`→¡, `?`→¿, `<`→« |
+| `$`     | currency                          | `e`→€, `l`→£, `c`→¢, `y`→¥, `w`→₩                      |
+| `?` `*` | Vietnamese tone marks             | `a`→ả, `a`→ạ                                           |
+
+The `¿¡` key is labelled with the two characters it makes from `!` and `?`, and is the closest the original system comes to a general-purpose compose key. Its full contents, and those of every other dead key, are in `Utils.kt`.
 
 Dead keys are quick, but they have two costs. They can only ever combine two characters, so they cannot produce symbols that are not an accented letter. And a dead key makes its own symbol awkward to type: swiping `~` produces nothing on its own, and you have to follow it with a space to get a bare `~`.
 
@@ -188,14 +198,12 @@ The compose key (`♫`) works like the compose key on a desktop Linux system. Pr
 | `♫` `s` `s` | ß      |
 | `♫` `-` `>` | →      |
 | `♫` `1` `2` | ½      |
-| `♫` `e` `=` | €      |
-| `♫` `"` `a` | ä      |
+| `♫` `y` `=` | ¥      |
+| `♫` `°` `a` | å      |
 
-Because the sequence is opened by the compose key rather than closed by it, it can be any length, which is what makes characters like © reachable.
+`♫` `.` `i` gives the Turkish dotless ı rather than a doubly dotted i, following X11; `♫` `.` `I` gives İ.
 
-While you type, the pending sequence appears underlined. Backspace steps back through it one character at a time, and a sequence that matches nothing is committed as the plain characters you typed, so nothing is ever lost.
-
-Sequences follow the [X11 compose table](https://gitlab.freedesktop.org/xorg/lib/libx11/-/blob/master/nls/en_US.UTF-8/Compose.pre), so habits carry over from desktop Linux. Many characters have more than one spelling, and both orders usually work: © is `o` `c`, `O` `C` or `C` `O`. The full list lives in `ComposeComboTable.kt`.
+Sequences follow the [X11 compose table](https://gitlab.freedesktop.org/xorg/lib/libx11/-/blob/master/nls/en_US.UTF-8/Compose.pre), so habits carry over from desktop Linux. Many characters have more than one spelling, and both orders usually work: © is `o` `c` or `c` `o`. The full list lives in `ComposeComboTable.kt`.
 
 Mathematical and technical characters are covered too:
 
@@ -212,16 +220,6 @@ Mathematical and technical characters are covered too:
 The X11 spellings work too where they differ — `=` `_` for ≡, and `/` `=` or `=` `/` for ≠.
 
 Superscript and subscript digits use `^` and `_`, one sequence per digit, so ¹² is `♫` `^` `1` then `♫` `^` `2`.
-
-Three marks have no dead key on any layout and are only reachable this way. Each is typed before its letter:
-
-| Type        | Result | Mark      | Used for                |
-| ----------- | ------ | --------- | ----------------------- |
-| `♫` `_` `a` | ā      | macron    | vowel length            |
-| `♫` `.` `m` | ṁ      | dot above | stress, transliteration |
-| `♫` `!` `m` | ṃ      | dot below | retroflex consonants    |
-
-Together they cover Pali and Sanskrit transliteration. Note that `♫` `.` `i` gives the Turkish dotless ı rather than a doubly dotted i, following X11; `♫` `.` `I` gives İ.
 
 If your field needs characters that are not here, adding them is a few lines of data — see [Adding compose sequences](CONTRIBUTING.md#adding-compose-sequences) in the contributing guide.
 
