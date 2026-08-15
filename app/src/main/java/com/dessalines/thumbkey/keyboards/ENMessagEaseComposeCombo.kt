@@ -338,6 +338,120 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_SHIFTED =
         ),
     )
 
+// The shared messagease numeric layer has no compose key, which would put the superscripts and
+// subscripts out of reach: they need a digit, and digits only exist here. It is used by 34 other
+// layouts, so this is a copy rather than an edit.
+//
+// The diacritics sit on exactly the same swipes as in the letter modes, so the muscle memory
+// carries across the mode switch. The plain ^ moves to 7 to join the plain ~, matching where the
+// two of them sit on T, and the plain ` and ´ it displaces move to 8 beside the other quotes.
+val KB_EN_MESSAGEASE_COMPOSE_COMBO_NUMERIC =
+    KeyboardC(
+        listOf(
+            listOf(
+                KeyItemC(
+                    center = KeyC("1", size = LARGE),
+                    topLeft = COMPOSE_KEY,
+                    top = DIAERESIS_KEY,
+                    topRight = TILDE_KEY,
+                    bottom = CEDILLA_KEY,
+                    bottomLeft = KeyC("$"),
+                    right = KeyC("-"),
+                    bottomRight =
+                        getLocalCurrency()?.let {
+                            if (it !in setOf("$", "£", "€")) {
+                                KeyC(it)
+                            } else {
+                                null
+                            }
+                        },
+                ),
+                KeyItemC(
+                    center = KeyC("2", size = LARGE),
+                    topLeft = GRAVE_KEY,
+                    top = CIRCUMFLEX_KEY,
+                    topRight = ACUTE_KEY,
+                    right = KeyC("!"),
+                    bottomRight = KeyC("\\"),
+                    bottomLeft = KeyC("/"),
+                    left = KeyC("+"),
+                ),
+                KeyItemC(
+                    center = KeyC("3", size = LARGE),
+                    topLeft = BREVE_KEY,
+                    top = CARON_KEY,
+                    left = KeyC("?"),
+                    bottomRight = KeyC("€"),
+                    bottomLeft = KeyC("£"),
+                    bottom = KeyC("="),
+                ),
+                EMOJI_KEY_ITEM,
+            ),
+            listOf(
+                KeyItemC(
+                    center = KeyC("4", size = LARGE),
+                    topLeft = KeyC("{"),
+                    topRight = KeyC("%"),
+                    bottomRight = KeyC("_"),
+                    bottomLeft = KeyC("["),
+                    left = KeyC("("),
+                ),
+                KeyItemC(
+                    center = KeyC("5", size = LARGE),
+                    top = KeyC("¬"),
+                ),
+                KeyItemC(
+                    center = KeyC("6", size = LARGE),
+                    topLeft = KeyC("|"),
+                    topRight = KeyC("}"),
+                    right = KeyC(")"),
+                    bottomRight = KeyC("]"),
+                    bottomLeft = KeyC("@"),
+                ),
+                ABC_KEY_ITEM,
+            ),
+            listOf(
+                KeyItemC(
+                    center = KeyC("7", size = LARGE),
+                    topLeft = KeyC("~"),
+                    top = KeyC("^"),
+                    left = KeyC("<"),
+                    right = KeyC("*"),
+                    bottomRight = KeyC("\t", displayText = "⇥"),
+                ),
+                KeyItemC(
+                    center = KeyC("8", size = LARGE),
+                    topLeft = KeyC("\""),
+                    top = KeyC("`"),
+                    topRight = KeyC("'"),
+                    left = KeyC("´"),
+                    bottomRight = KeyC(":"),
+                    bottom = KeyC("."),
+                    bottomLeft = KeyC(","),
+                ),
+                KeyItemC(
+                    center = KeyC("9", size = LARGE),
+                    top = KeyC("&"),
+                    topRight = KeyC("°"),
+                    right = KeyC(">"),
+                    bottom = KeyC("¿"),
+                    bottomRight = KeyC("¡"),
+                    bottomLeft = KeyC(";"),
+                    left = KeyC("#"),
+                ),
+                BACKSPACE_KEY_ITEM,
+            ),
+            listOf(
+                KeyItemC(
+                    center = KeyC("0", size = LARGE),
+                    widthMultiplier = 2,
+                ),
+                SPACEBAR_SKINNY_KEY_ITEM,
+                RETURN_KEY_ITEM,
+            ),
+        ),
+    )
+
 val KB_EN_MESSAGEASE_COMPOSE_COMBO: KeyboardDefinition =
     KeyboardDefinition(
         title = "english messagease compose combo",
@@ -345,7 +459,7 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO: KeyboardDefinition =
             KeyboardDefinitionModes(
                 main = KB_EN_MESSAGEASE_COMPOSE_COMBO_MAIN,
                 shifted = KB_EN_MESSAGEASE_COMPOSE_COMBO_SHIFTED,
-                numeric = KB_EN_MESSAGEASE_NUMERIC,
+                numeric = KB_EN_MESSAGEASE_COMPOSE_COMBO_NUMERIC,
             ),
         settings =
             KeyboardDefinitionSettings(

@@ -89,14 +89,29 @@ object ComposeComboTable {
             put("14", "¼")
             put("34", "¾")
 
-            // Super- and subscripts
+            // Super- and subscripts. Multi-digit runs are typed one sequence per digit, so ¹²
+            // is ^1 then ^2.
             put("^0", "⁰")
             put("^1", "¹")
             put("^2", "²")
             put("^3", "³")
+            put("^4", "⁴")
+            put("^5", "⁵")
+            put("^6", "⁶")
+            put("^7", "⁷")
+            put("^8", "⁸")
+            put("^9", "⁹")
             put("^n", "ⁿ")
+            put("_0", "₀")
             put("_1", "₁")
             put("_2", "₂")
+            put("_3", "₃")
+            put("_4", "₄")
+            put("_5", "₅")
+            put("_6", "₆")
+            put("_7", "₇")
+            put("_8", "₈")
+            put("_9", "₉")
 
             // Currency
             put("e=", "€")
@@ -113,10 +128,8 @@ object ComposeComboTable {
             // additive: adding it to a lowercase i takes it away, and to an uppercase I
             // puts it on.
             put("i.", "ı")
-            put(".i", "ı")
             put("ii", "ı")
             put("I.", "İ")
-            put(".I", "İ")
             put("II", "İ")
 
             // Ligatures and standalone letters
@@ -142,6 +155,15 @@ object ComposeComboTable {
             putDiacritic("`", "aàAÀeèEÈiìIÌoòOÒuùUÙ")
             putDiacritic("^", "aâAÂeêEÊiîIÎoôOÔuûUÛ")
             putDiacritic("~", "aãAÃnñNÑoõOÕ")
+
+            // Marks with no dead key on any layout. Dot above and macron mark stress and vowel
+            // length; together with dot below they cover Pali and Sanskrit transliteration, where
+            // ā ī ū come from the macron, ṁ ṅ from the dot above, and ṃ ṇ ṭ ḍ ḷ from the dot
+            // below. Note that `.i` is the Turkish dotless ı rather than an i with a second dot,
+            // which is X11's convention and the reason the Turkish pair needs no special case.
+            putDiacritic(".", "aȧbḃcċdḋeėfḟgġhḣiımṁnṅoȯpṗrṙsṡtṫwẇxẋyẏzżAȦBḂCĊDḊEĖFḞGĠHḢIİMṀNṄOȮPṖRṘSṠTṪWẆXẊYẎZŻ")
+            putDiacritic("_", "aāeēgḡiīoōuūyȳAĀEĒGḠIĪOŌUŪYȲ")
+            putDiacritic("!", "aạbḅdḍeẹhḥiịkḳlḷmṃnṇoọrṛsṣtṭuụvṿwẉyỵzẓAẠBḄDḌEẸHḤIỊKḲLḶMṂNṆOỌRṚSṢTṬUỤVṾWẈYỴZẒ")
         }
 
     /** Every proper prefix of every sequence, used to decide whether to keep buffering. */
