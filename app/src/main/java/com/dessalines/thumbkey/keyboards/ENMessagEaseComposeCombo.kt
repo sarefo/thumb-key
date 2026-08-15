@@ -11,9 +11,54 @@ import com.dessalines.thumbkey.utils.FontSizeVariant.*
 import com.dessalines.thumbkey.utils.KeyAction.*
 import com.dessalines.thumbkey.utils.SwipeNWay.*
 
-// This is "english messagease compose" with one extra key: a desktop-style compose key on the
-// top-left corner of A. The existing dead keys are left exactly as they were, so `n` then `~`
-// still gives ñ; the compose key adds sequences those cannot express, such as ♫ o c for ©.
+// "english messagease compose", reworked around the compose key.
+//
+// The dead keys for ~ ^ ° " $ and ¿¡ are gone. Those characters are now plain keys that type
+// themselves, because a dead key makes its own symbol awkward to reach: it only emits the bare
+// character when followed by a space, which is a poor trade for a symbol people type directly.
+//
+// Four diacritics remain as dead keys, since they are worth the keystroke saved and are never
+// wanted as bare characters: grave and acute on N, diaeresis and cedilla on T. They use
+// NormalizeLastKey, which appends a combining mark and normalizes, so they work on any letter
+// with a precomposed form rather than only the ones in a hand-written table.
+//
+// Everything else goes through the compose key (♫) on the top-left of A: ♫ o c for ©,
+// ♫ ~ ~ for ≈, ♫ = = for ≡.
+
+private val COMPOSE_KEY =
+    KeyC(
+        display = KeyDisplay.TextDisplay("♫"),
+        action = StartComposeCombo,
+        color = MUTED,
+    )
+
+private val GRAVE_KEY =
+    KeyC(
+        display = KeyDisplay.TextDisplay("`"),
+        action = NormalizeLastKey("\u0300"),
+        color = MUTED,
+    )
+
+private val ACUTE_KEY =
+    KeyC(
+        display = KeyDisplay.TextDisplay("´"),
+        action = NormalizeLastKey("\u0301"),
+        color = MUTED,
+    )
+
+private val DIAERESIS_KEY =
+    KeyC(
+        display = KeyDisplay.TextDisplay("¨"),
+        action = NormalizeLastKey("\u0308"),
+        color = MUTED,
+    )
+
+private val CEDILLA_KEY =
+    KeyC(
+        display = KeyDisplay.TextDisplay("¸"),
+        action = NormalizeLastKey("\u0327"),
+        color = MUTED,
+    )
 
 val KB_EN_MESSAGEASE_COMPOSE_COMBO_MAIN =
     KeyboardC(
@@ -21,43 +66,16 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_MAIN =
             listOf(
                 KeyItemC(
                     center = KeyC("a", size = LARGE),
-                    topLeft =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("♫"),
-                            action = StartComposeCombo,
-                            color = MUTED,
-                        ),
-                    topRight =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("¿¡"),
-                            action = ComposeLastKey("!"),
-                            color = MUTED,
-                        ),
+                    topLeft = COMPOSE_KEY,
                     bottomRight = KeyC("v"),
                     right = KeyC("-", color = MUTED),
-                    bottomLeft = KeyC("$", color = MUTED),
                 ),
                 KeyItemC(
                     center = KeyC("n", size = LARGE),
                     bottom = KeyC("l"),
-                    topLeft =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("`"),
-                            action = ComposeLastKey("`"),
-                            color = MUTED,
-                        ),
-                    top =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("^"),
-                            action = ComposeLastKey("^"),
-                            color = MUTED,
-                        ),
-                    topRight =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("´"),
-                            action = ComposeLastKey("'"),
-                            color = MUTED,
-                        ),
+                    topLeft = GRAVE_KEY,
+                    top = KeyC("^", color = MUTED),
+                    topRight = ACUTE_KEY,
                     right = KeyC("!", color = MUTED),
                     bottomRight = KeyC("\\", color = MUTED),
                     bottomLeft = KeyC("/", color = MUTED),
@@ -65,20 +83,9 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_MAIN =
                 ),
                 KeyItemC(
                     center = KeyC("i", size = LARGE),
-                    top =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("˘"),
-                            action = ComposeLastKey("˘"),
-                            color = MUTED,
-                        ),
-                    topRight =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("\$"),
-                            action = ComposeLastKey("\$"),
-                            color = MUTED,
-                        ),
                     bottomLeft = KeyC("x"),
                     left = KeyC("?", color = MUTED),
+                    topRight = KeyC("$", color = MUTED),
                     bottomRight = KeyC("€", color = MUTED),
                     bottom = KeyC("=", color = MUTED),
                 ),
@@ -132,24 +139,16 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_MAIN =
                 KeyItemC(
                     center = KeyC("t", size = LARGE),
                     topRight = KeyC("y"),
-                    topLeft =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("~"),
-                            action = ComposeLastKey("~"),
-                            color = MUTED,
-                        ),
+                    topLeft = KeyC("~", color = MUTED),
+                    top = DIAERESIS_KEY,
+                    bottom = CEDILLA_KEY,
                     right = KeyC("*", color = MUTED),
                     bottomRight = KeyC("\t", displayText = "⇥", color = MUTED),
                     left = KeyC("<", color = MUTED),
                 ),
                 KeyItemC(
                     center = KeyC("e", size = LARGE),
-                    topLeft =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("\""),
-                            action = ComposeLastKey("\""),
-                            color = MUTED,
-                        ),
+                    topLeft = KeyC("\"", color = MUTED),
                     top = KeyC("w"),
                     topRight = KeyC("'", color = MUTED),
                     right = KeyC("z"),
@@ -161,12 +160,7 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_MAIN =
                     center = KeyC("s", size = LARGE),
                     topLeft = KeyC("f"),
                     top = KeyC("&", color = MUTED),
-                    topRight =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("°"),
-                            action = ComposeLastKey("°"),
-                            color = MUTED,
-                        ),
+                    topRight = KeyC("°", color = MUTED),
                     right = KeyC(">", color = MUTED),
                     bottomLeft = KeyC(";", color = MUTED),
                     left = KeyC("#", color = MUTED),
@@ -186,43 +180,16 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_SHIFTED =
             listOf(
                 KeyItemC(
                     center = KeyC("A", size = LARGE),
-                    topLeft =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("♫"),
-                            action = StartComposeCombo,
-                            color = MUTED,
-                        ),
-                    topRight =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("¿¡"),
-                            action = ComposeLastKey("!"),
-                            color = MUTED,
-                        ),
+                    topLeft = COMPOSE_KEY,
                     bottomRight = KeyC("V"),
                     right = KeyC("-", color = MUTED),
-                    bottomLeft = KeyC("$", color = MUTED),
                 ),
                 KeyItemC(
                     center = KeyC("N", size = LARGE),
                     bottom = KeyC("L"),
-                    topLeft =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("`"),
-                            action = ComposeLastKey("`"),
-                            color = MUTED,
-                        ),
-                    top =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("^"),
-                            action = ComposeLastKey("^"),
-                            color = MUTED,
-                        ),
-                    topRight =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("´"),
-                            action = ComposeLastKey("'"),
-                            color = MUTED,
-                        ),
+                    topLeft = GRAVE_KEY,
+                    top = KeyC("^", color = MUTED),
+                    topRight = ACUTE_KEY,
                     right = KeyC("!", color = MUTED),
                     bottomRight = KeyC("\\", color = MUTED),
                     bottomLeft = KeyC("/", color = MUTED),
@@ -230,20 +197,9 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_SHIFTED =
                 ),
                 KeyItemC(
                     center = KeyC("I", size = LARGE),
-                    top =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("˘"),
-                            action = ComposeLastKey("˘"),
-                            color = MUTED,
-                        ),
-                    topRight =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("\$"),
-                            action = ComposeLastKey("\$"),
-                            color = MUTED,
-                        ),
                     bottomLeft = KeyC("X"),
                     left = KeyC("?", color = MUTED),
+                    topRight = KeyC("$", color = MUTED),
                     bottomRight = KeyC("€", color = MUTED),
                     bottom = KeyC("=", color = MUTED),
                 ),
@@ -300,31 +256,18 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_SHIFTED =
                 KeyItemC(
                     center = KeyC("T", size = LARGE),
                     topRight = KeyC("Y"),
-                    topLeft =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("~"),
-                            action = ComposeLastKey("~"),
-                            color = MUTED,
-                        ),
+                    topLeft = KeyC("~", color = MUTED),
+                    top = DIAERESIS_KEY,
+                    bottom = CEDILLA_KEY,
                     right = KeyC("*", color = MUTED),
                     left = KeyC("<", color = MUTED),
                     bottomRight = KeyC("\t", displayText = "⇥", color = MUTED),
                 ),
                 KeyItemC(
                     center = KeyC("E", size = LARGE),
-                    topLeft =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("\""),
-                            action = ComposeLastKey("\""),
-                            color = MUTED,
-                        ),
+                    topLeft = KeyC("\"", color = MUTED),
                     top = KeyC("W"),
-                    topRight =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("'"),
-                            action = ComposeLastKey("'"),
-                            color = MUTED,
-                        ),
+                    topRight = KeyC("'", color = MUTED),
                     right = KeyC("Z"),
                     bottomRight = KeyC(":", color = MUTED),
                     bottom = KeyC(".", color = MUTED),
@@ -334,12 +277,7 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_SHIFTED =
                     center = KeyC("S", size = LARGE),
                     topLeft = KeyC("F"),
                     top = KeyC("&", color = MUTED),
-                    topRight =
-                        KeyC(
-                            display = KeyDisplay.TextDisplay("°"),
-                            action = ComposeLastKey("°"),
-                            color = MUTED,
-                        ),
+                    topRight = KeyC("°", color = MUTED),
                     right = KeyC(">", color = MUTED),
                     bottomLeft = KeyC(";", color = MUTED),
                     left = KeyC("#", color = MUTED),

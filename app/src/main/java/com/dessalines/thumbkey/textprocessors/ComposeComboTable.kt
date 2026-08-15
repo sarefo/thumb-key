@@ -19,6 +19,7 @@ package com.dessalines.thumbkey.textprocessors
  * additions, each sitting alongside the X11 spelling rather than replacing it:
  *
  *  - `!=` for ≠, which programmers type without thinking (X11: `/=`, `=/`)
+ *  - `==` for ≡, which is what people guess (X11: `=_`)
  *  - `00` for ∞ (X11: `88`)
  *  - `sz` for ß, the German convention (X11: `ss`)
  *  - `^n` for ⁿ (X11: `^_n`)
@@ -59,6 +60,7 @@ object ComposeComboTable {
             put("=/", "≠")
             put("!=", "≠") // not X11, but the habit every programmer already has
             put("=_", "≡")
+            put("==", "≡") // not X11, but it is what people guess
             put("<=", "≤")
             put(">=", "≥")
             put("~~", "≈")

@@ -157,7 +157,7 @@ Enabling `Ghost keys` in keyboard settings will enable swiping hidden symbol key
 
 ### Accents and special characters
 
-Layouts with `compose` in their name can build characters that have no key of their own. There are two systems for this, and a layout may offer both at once.
+Layouts with `compose` in their name can build characters that have no key of their own. Two independent systems do this — dead keys, and a compose key. They are alternatives rather than replacements, and a layout may offer either or both.
 
 #### Dead keys
 
@@ -172,7 +172,9 @@ A dead key modifies the character you have **just typed**. Type the base letter 
 
 The available dead keys are `"` `'` `` ` `` `^` `~` `°` `˘` `ˇ` `-` `!` `$` `?` `*`. Following a dead key with a space types the mark itself.
 
-Dead keys are quick, but they can only ever combine two characters, so they cannot produce symbols that are not an accented letter.
+Dead keys are quick, but they have two costs. They can only ever combine two characters, so they cannot produce symbols that are not an accented letter. And a dead key makes its own symbol awkward to type: swiping `~` produces nothing on its own, and you have to follow it with a space to get a bare `~`.
+
+That trade is worth it for accents, which are rarely wanted as bare marks, and less so for `~`, `^`, `°` and `"`, which are often typed directly. Each layout strikes its own balance: `english messagease compose` offers the full set of dead keys, while `english messagease compose combo` keeps only grave, acute, diaeresis and cedilla, leaves the rest as ordinary character keys, and reaches everything else through the compose key below.
 
 #### Compose combo
 
@@ -197,13 +199,15 @@ Mathematical and technical characters are covered too:
 
 | Type        | Result | Type        | Result |
 | ----------- | ------ | ----------- | ------ |
-| `♫` `=` `_` | ≡      | `♫` `~` `~` | ≈      |
-| `♫` `/` `=` | ≠      | `♫` `<` `=` | ≤      |
-| `♫` `!` `=` | ≠      | `♫` `>` `=` | ≥      |
-| `♫` `+` `-` | ±      | `♫` `x` `x` | ×      |
-| `♫` `8` `8` | ∞      | `♫` `-` `:` | ÷      |
-| `♫` `/` `v` | √      | `♫` `{` `}` | ∅      |
-| `♫` `m` `u` | µ      | `♫` `.` `.` | …      |
+| `♫` `=` `=` | ≡      | `♫` `~` `~` | ≈      |
+| `♫` `!` `=` | ≠      | `♫` `<` `=` | ≤      |
+| `♫` `+` `-` | ±      | `♫` `>` `=` | ≥      |
+| `♫` `x` `x` | ×      | `♫` `-` `:` | ÷      |
+| `♫` `8` `8` | ∞      | `♫` `{` `}` | ∅      |
+| `♫` `/` `v` | √      | `♫` `m` `u` | µ      |
+| `♫` `.` `.` | …      | `♫` `.` `-` | ·      |
+
+The X11 spellings work too where they differ — `=` `_` for ≡, and `/` `=` or `=` `/` for ≠.
 
 If your field needs characters that are not here, adding them is a few lines of data — see [Adding compose sequences](CONTRIBUTING.md#adding-compose-sequences) in the contributing guide.
 
