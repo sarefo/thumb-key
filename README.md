@@ -174,7 +174,9 @@ The available dead keys are `"` `'` `` ` `` `^` `~` `°` `˘` `ˇ` `-` `!` `$` `
 
 Dead keys are quick, but they have two costs. They can only ever combine two characters, so they cannot produce symbols that are not an accented letter. And a dead key makes its own symbol awkward to type: swiping `~` produces nothing on its own, and you have to follow it with a space to get a bare `~`.
 
-That trade is worth it for accents, which are rarely wanted as bare marks, and less so for `~`, `^`, `°` and `"`, which are often typed directly. Each layout strikes its own balance: `english messagease compose` offers the full set of dead keys, while `english messagease compose combo` keeps only grave, acute, diaeresis and cedilla, leaves the rest as ordinary character keys, and reaches everything else through the compose key below.
+That trade is worth it for accents, which are rarely wanted as bare marks, and less so for `~`, `^`, `°` and `"`, which are often typed directly.
+
+Each layout strikes its own balance. `english messagease compose` offers the full set of dead keys. `english messagease compose combo` instead keeps eight dead keys for marks alone — grave, acute, circumflex, diaeresis, tilde, caron, breve and cedilla — grouped along the top edge of `A`, `N` and `I`, and drawn as `` ` `` `´` `ˆ` `¨` `˜` `ˇ` `˘` `¸` so they are visibly not the plain `~` and `^` that sit together on `T`. Everything else there goes through the compose key.
 
 #### Compose combo
 
@@ -208,6 +210,18 @@ Mathematical and technical characters are covered too:
 | `♫` `.` `.` | …      | `♫` `.` `-` | ·      |
 
 The X11 spellings work too where they differ — `=` `_` for ≡, and `/` `=` or `=` `/` for ≠.
+
+Superscript and subscript digits use `^` and `_`, one sequence per digit, so ¹² is `♫` `^` `1` then `♫` `^` `2`.
+
+Three marks have no dead key on any layout and are only reachable this way. Each is typed before its letter:
+
+| Type        | Result | Mark      | Used for                |
+| ----------- | ------ | --------- | ----------------------- |
+| `♫` `_` `a` | ā      | macron    | vowel length            |
+| `♫` `.` `m` | ṁ      | dot above | stress, transliteration |
+| `♫` `!` `m` | ṃ      | dot below | retroflex consonants    |
+
+Together they cover Pali and Sanskrit transliteration. Note that `♫` `.` `i` gives the Turkish dotless ı rather than a doubly dotted i, following X11; `♫` `.` `I` gives İ.
 
 If your field needs characters that are not here, adding them is a few lines of data — see [Adding compose sequences](CONTRIBUTING.md#adding-compose-sequences) in the contributing guide.
 

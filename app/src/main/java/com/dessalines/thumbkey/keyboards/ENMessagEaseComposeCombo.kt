@@ -29,6 +29,9 @@ import com.dessalines.thumbkey.utils.SwipeNWay.*
 // They use NormalizeLastKey, which appends a combining mark and normalizes, so they work on any
 // letter with a precomposed form rather than only the ones in a hand-written table.
 //
+// E carries the three quote characters " ´ and `, the last of which markdown needs and which
+// the shared numeric layer otherwise hides in digit mode.
+//
 // Everything else goes through the compose key (♫) on the top-left of A: ♫ o c for ©,
 // ♫ ~ ~ for ≈, ♫ = = for ≡.
 
@@ -187,6 +190,7 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_MAIN =
                 ),
                 KeyItemC(
                     center = KeyC("e", size = LARGE),
+                    left = KeyC("`", color = MUTED),
                     topLeft = KeyC("\"", color = MUTED),
                     top = KeyC("w"),
                     topRight = KeyC("'", color = MUTED),
@@ -310,6 +314,7 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_SHIFTED =
                 ),
                 KeyItemC(
                     center = KeyC("E", size = LARGE),
+                    left = KeyC("`", color = MUTED),
                     topLeft = KeyC("\"", color = MUTED),
                     top = KeyC("W"),
                     topRight = KeyC("'", color = MUTED),
@@ -366,7 +371,6 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_NUMERIC =
                 KeyItemC(
                     center = KeyC("2", size = LARGE),
                     topLeft = KeyC("`"),
-                    top = KeyC("^"),
                     topRight = KeyC("´"),
                     right = KeyC("!"),
                     bottomRight = KeyC("\\"),
@@ -413,6 +417,7 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_NUMERIC =
                 KeyItemC(
                     center = KeyC("7", size = LARGE),
                     topLeft = KeyC("~"),
+                    top = KeyC("^"),
                     left = KeyC("<"),
                     right = KeyC("*"),
                     bottomRight = KeyC("\t", displayText = "⇥"),
