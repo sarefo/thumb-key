@@ -17,13 +17,16 @@ import com.dessalines.thumbkey.utils.SwipeNWay.*
 // themselves, because a dead key makes its own symbol awkward to reach: it only emits the bare
 // character when followed by a space, which is a poor trade for a symbol people type directly.
 //
-// Six diacritics remain as dead keys, since they are worth the keystroke saved. They are grouped
-// along the top edge so they read as one block rather than as stray keys: caron, diaeresis and
-// tilde on the top row, grave and acute on N. The cedilla sits below A, since a cedilla hangs
-// under its letter. Together they cover German, French and Spanish, plus the caron languages.
+// Eight diacritics remain as dead keys, since they are worth the keystroke saved. They are
+// grouped along the top edge of A, N and I so they read as one block rather than as stray keys,
+// with each row reading left to right as corner, top, corner. The cedilla is the exception and
+// sits below A, since a cedilla hangs under its letter. Together they cover German, French,
+// Spanish, Romanian and the caron languages.
 //
-// They are drawn with the spacing-modifier glyphs (ˇ ¨ ˜ ´ ¸) rather than plain ASCII, so the
-// tilde dead key on A is visibly not the same key as the ordinary ~ on T.
+// They are drawn with the spacing-modifier glyphs rather than plain ASCII, so the tilde and
+// circumflex dead keys are visibly not the ordinary ~ and ^ that sit together on T. The cedilla
+// uses a dotted circle, the standard way of showing a combining mark, because the bare glyph
+// sits on the baseline and clips out of the key.
 //
 // They use NormalizeLastKey, which appends a combining mark and normalizes, so they work on any
 // letter with a precomposed form rather than only the ones in a hand-written table.
@@ -61,7 +64,7 @@ private val DIAERESIS_KEY =
 
 private val CEDILLA_KEY =
     KeyC(
-        display = KeyDisplay.TextDisplay("¸"),
+        display = KeyDisplay.TextDisplay("◌̧"),
         action = NormalizeLastKey("\u0327"),
         color = MUTED,
     )
@@ -77,6 +80,20 @@ private val CARON_KEY =
     KeyC(
         display = KeyDisplay.TextDisplay("ˇ"),
         action = NormalizeLastKey("\u030c"),
+        color = MUTED,
+    )
+
+private val CIRCUMFLEX_KEY =
+    KeyC(
+        display = KeyDisplay.TextDisplay("ˆ"),
+        action = NormalizeLastKey("\u0302"),
+        color = MUTED,
+    )
+
+private val BREVE_KEY =
+    KeyC(
+        display = KeyDisplay.TextDisplay("˘"),
+        action = NormalizeLastKey("\u0306"),
         color = MUTED,
     )
 
@@ -97,7 +114,7 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_MAIN =
                     center = KeyC("n", size = LARGE),
                     bottom = KeyC("l"),
                     topLeft = GRAVE_KEY,
-                    top = KeyC("^", color = MUTED),
+                    top = CIRCUMFLEX_KEY,
                     topRight = ACUTE_KEY,
                     right = KeyC("!", color = MUTED),
                     bottomRight = KeyC("\\", color = MUTED),
@@ -106,7 +123,8 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_MAIN =
                 ),
                 KeyItemC(
                     center = KeyC("i", size = LARGE),
-                    topLeft = CARON_KEY,
+                    topLeft = BREVE_KEY,
+                    top = CARON_KEY,
                     bottomLeft = KeyC("x"),
                     left = KeyC("?", color = MUTED),
                     topRight = KeyC("$", color = MUTED),
@@ -164,6 +182,7 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_MAIN =
                     center = KeyC("t", size = LARGE),
                     topRight = KeyC("y"),
                     topLeft = KeyC("~", color = MUTED),
+                    top = KeyC("^", color = MUTED),
                     right = KeyC("*", color = MUTED),
                     bottomRight = KeyC("\t", displayText = "⇥", color = MUTED),
                     left = KeyC("<", color = MUTED),
@@ -213,7 +232,7 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_SHIFTED =
                     center = KeyC("N", size = LARGE),
                     bottom = KeyC("L"),
                     topLeft = GRAVE_KEY,
-                    top = KeyC("^", color = MUTED),
+                    top = CIRCUMFLEX_KEY,
                     topRight = ACUTE_KEY,
                     right = KeyC("!", color = MUTED),
                     bottomRight = KeyC("\\", color = MUTED),
@@ -222,7 +241,8 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_SHIFTED =
                 ),
                 KeyItemC(
                     center = KeyC("I", size = LARGE),
-                    topLeft = CARON_KEY,
+                    topLeft = BREVE_KEY,
+                    top = CARON_KEY,
                     bottomLeft = KeyC("X"),
                     left = KeyC("?", color = MUTED),
                     topRight = KeyC("$", color = MUTED),
@@ -283,6 +303,7 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_SHIFTED =
                     center = KeyC("T", size = LARGE),
                     topRight = KeyC("Y"),
                     topLeft = KeyC("~", color = MUTED),
+                    top = KeyC("^", color = MUTED),
                     right = KeyC("*", color = MUTED),
                     left = KeyC("<", color = MUTED),
                     bottomRight = KeyC("\t", displayText = "⇥", color = MUTED),
