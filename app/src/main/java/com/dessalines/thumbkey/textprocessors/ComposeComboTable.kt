@@ -24,8 +24,11 @@ package com.dessalines.thumbkey.textprocessors
  *  - `sz` for ß, the German convention (X11: `ss`)
  *  - `^n` for ⁿ (X11: `^_n`)
  *
- * Watch for sequences X11 has already spent: `co` is ǒ there, not ©, which is why the
- * letter-first spellings of © and ® are the uppercase `CO` and `RO`.
+ * One sequence is taken over rather than left alone. X11 uses `c` followed by a letter for the
+ * caron, 26 entries of which `co` is ǒ. None of that family is implemented here, and layouts
+ * with a caron dead key can write ǒ as `o` plus the dead key, so `co` is used for © instead —
+ * the spelling people reach for first. Adding the X11 caron family later would mean giving `co`
+ * back. `ro` for ® is free either way; X11 defines only four `r` sequences and that is not one.
  */
 object ComposeComboTable {
     val sequences: Map<String, String> =
@@ -35,9 +38,11 @@ object ComposeComboTable {
             put("oc", "©")
             put("OC", "©")
             put("CO", "©")
+            put("co", "©") // X11 spends this on ǒ; see the note above
             put("or", "®")
             put("OR", "®")
             put("RO", "®")
+            put("ro", "®")
             put("tm", "™")
             put("TM", "™")
             put("so", "§")
