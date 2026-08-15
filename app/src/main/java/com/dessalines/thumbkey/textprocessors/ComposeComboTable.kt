@@ -12,43 +12,67 @@ package com.dessalines.thumbkey.textprocessors
  * a match is committed as soon as it is found. `--` is therefore not a sequence of its own,
  * even though `---` and `--.` both exist.
  *
- * Sequences follow the X11 `Compose` file where one exists, so muscle memory carries over from
- * desktop Linux. See
+ * Sequences follow the X11 `Compose` file so muscle memory carries over from desktop Linux. See
  * https://gitlab.freedesktop.org/xorg/lib/libx11/-/blob/master/nls/en_US.UTF-8/Compose.pre
+ *
+ * Every sequence here either matches X11 exactly or is unused by X11. There are four deliberate
+ * additions, each sitting alongside the X11 spelling rather than replacing it:
+ *
+ *  - `!=` for ≠, which programmers type without thinking (X11: `/=`, `=/`)
+ *  - `00` for ∞ (X11: `88`)
+ *  - `sz` for ß, the German convention (X11: `ss`)
+ *  - `^n` for ⁿ (X11: `^_n`)
+ *
+ * Watch for sequences X11 has already spent: `co` is ǒ there, not ©, which is why the
+ * letter-first spellings of © and ® are the uppercase `CO` and `RO`.
  */
 object ComposeComboTable {
     val sequences: Map<String, String> =
         buildMap {
-            // Legal and typographic symbols
+            // Legal and typographic symbols. X11 defines both letter orders for these, so
+            // either habit works.
             put("oc", "©")
+            put("OC", "©")
+            put("CO", "©")
             put("or", "®")
+            put("OR", "®")
+            put("RO", "®")
             put("tm", "™")
+            put("TM", "™")
             put("so", "§")
             put("p!", "¶")
             put("%o", "‰")
-            put("...", "…")
+            put("..", "…")
             put("---", "—")
             put("--.", "–")
             put("<<", "«")
             put(">>", "»")
             put("!!", "¡")
             put("??", "¿")
+            put(".-", "·")
 
-            // Mathematics
+            // Mathematics and programming
             put("+-", "±")
             put("-:", "÷")
             put("xx", "×")
-            put("!=", "≠")
+            put("/=", "≠")
+            put("=/", "≠")
+            put("!=", "≠") // not X11, but the habit every programmer already has
+            put("=_", "≡")
             put("<=", "≤")
             put(">=", "≥")
             put("~~", "≈")
+            put("88", "∞")
             put("00", "∞")
             put("oo", "°")
+            put("{}", "∅")
+            put("/v", "√")
+            put("mu", "µ")
 
             // Arrows
             put("->", "→")
             put("<-", "←")
-            put("<>", "↔")
+            put("<>", "⋄")
 
             // Fractions
             put("12", "½")
@@ -74,7 +98,8 @@ object ComposeComboTable {
             put("y=", "¥")
             put("Y=", "¥")
             put("c/", "¢")
-            put("C/", "¢")
+            put("/c", "¢")
+            put("C/", "₡") // colón, per X11; the cent sign is lowercase
 
             // Ligatures and standalone letters
             put("ss", "ß")

@@ -176,22 +176,36 @@ Dead keys are quick, but they can only ever combine two characters, so they cann
 
 #### Compose combo
 
-The compose key (`⎄`) works like the compose key on a desktop Linux system. Press it **first**, then type a short sequence, which is replaced by a single character:
+The compose key (`♫`) works like the compose key on a desktop Linux system. Press it **first**, then type a short sequence, which is replaced by a single character:
 
 | Type        | Result |
 | ----------- | ------ |
-| `⎄` `o` `c` | ©      |
-| `⎄` `s` `s` | ß      |
-| `⎄` `-` `>` | →      |
-| `⎄` `1` `2` | ½      |
-| `⎄` `e` `=` | €      |
-| `⎄` `"` `a` | ä      |
+| `♫` `o` `c` | ©      |
+| `♫` `s` `s` | ß      |
+| `♫` `-` `>` | →      |
+| `♫` `1` `2` | ½      |
+| `♫` `e` `=` | €      |
+| `♫` `"` `a` | ä      |
 
 Because the sequence is opened by the compose key rather than closed by it, it can be any length, which is what makes characters like © reachable.
 
 While you type, the pending sequence appears underlined. Backspace steps back through it one character at a time, and a sequence that matches nothing is committed as the plain characters you typed, so nothing is ever lost.
 
-Sequences follow the X11 compose table where one exists, so habits carry over from desktop Linux. The full list lives in `ComposeComboTable.kt`.
+Sequences follow the [X11 compose table](https://gitlab.freedesktop.org/xorg/lib/libx11/-/blob/master/nls/en_US.UTF-8/Compose.pre), so habits carry over from desktop Linux. Many characters have more than one spelling, and both orders usually work: © is `o` `c`, `O` `C` or `C` `O`. The full list lives in `ComposeComboTable.kt`.
+
+Mathematical and technical characters are covered too:
+
+| Type        | Result | Type        | Result |
+| ----------- | ------ | ----------- | ------ |
+| `♫` `=` `_` | ≡      | `♫` `~` `~` | ≈      |
+| `♫` `/` `=` | ≠      | `♫` `<` `=` | ≤      |
+| `♫` `!` `=` | ≠      | `♫` `>` `=` | ≥      |
+| `♫` `+` `-` | ±      | `♫` `x` `x` | ×      |
+| `♫` `8` `8` | ∞      | `♫` `-` `:` | ÷      |
+| `♫` `/` `v` | √      | `♫` `{` `}` | ∅      |
+| `♫` `m` `u` | µ      | `♫` `.` `.` | …      |
+
+If your field needs characters that are not here, adding them is a few lines of data — see [Adding compose sequences](CONTRIBUTING.md#adding-compose-sequences) in the contributing guide.
 
 ### Coming from MessagEase Keyboard Tips
 

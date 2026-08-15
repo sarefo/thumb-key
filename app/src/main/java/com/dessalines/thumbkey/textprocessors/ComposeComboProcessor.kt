@@ -8,7 +8,7 @@ import com.dessalines.thumbkey.IMEService
 import com.dessalines.thumbkey.utils.TAG
 
 /** Shown underlined while a sequence is being typed, so the armed state is visible. */
-private const val COMPOSE_HINT = "⎄"
+private const val COMPOSE_HINT = "♫"
 
 /**
  * Implements a desktop-style compose key: press the compose key, then type a short sequence

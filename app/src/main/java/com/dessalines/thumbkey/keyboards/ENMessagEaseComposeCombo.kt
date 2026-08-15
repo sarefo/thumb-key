@@ -13,7 +13,7 @@ import com.dessalines.thumbkey.utils.SwipeNWay.*
 
 // This is "english messagease compose" with one extra key: a desktop-style compose key on the
 // top-left corner of A. The existing dead keys are left exactly as they were, so `n` then `~`
-// still gives ñ; the compose key adds sequences those cannot express, such as ⎄ o c for ©.
+// still gives ñ; the compose key adds sequences those cannot express, such as ♫ o c for ©.
 
 val KB_EN_MESSAGEASE_COMPOSE_COMBO_MAIN =
     KeyboardC(
@@ -23,7 +23,7 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_MAIN =
                     center = KeyC("a", size = LARGE),
                     topLeft =
                         KeyC(
-                            display = KeyDisplay.TextDisplay("⎄"),
+                            display = KeyDisplay.TextDisplay("♫"),
                             action = StartComposeCombo,
                             color = MUTED,
                         ),
@@ -188,7 +188,7 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_SHIFTED =
                     center = KeyC("A", size = LARGE),
                     topLeft =
                         KeyC(
-                            display = KeyDisplay.TextDisplay("⎄"),
+                            display = KeyDisplay.TextDisplay("♫"),
                             action = StartComposeCombo,
                             color = MUTED,
                         ),
