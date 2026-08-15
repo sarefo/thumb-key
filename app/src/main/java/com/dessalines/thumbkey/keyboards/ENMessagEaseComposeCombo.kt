@@ -342,9 +342,9 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_SHIFTED =
 // subscripts out of reach: they need a digit, and digits only exist here. It is used by 34 other
 // layouts, so this is a copy rather than an edit.
 //
-// The diacritics sit on exactly the same swipes as in the letter modes, so the muscle memory
-// carries across the mode switch. The plain ^ moves to 7 to join the plain ~, matching where the
-// two of them sit on T, and the plain ` and ´ it displaces move to 8 beside the other quotes.
+// Apart from that key it stays close to the shared layer. There are no dead keys here, so the
+// plain ` ^ ´ keep their usual place on 2, which is also where the letter modes put the matching
+// dead keys. The comparison operators join the = on 3.
 val KB_EN_MESSAGEASE_COMPOSE_COMBO_NUMERIC =
     KeyboardC(
         listOf(
@@ -352,9 +352,6 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_NUMERIC =
                 KeyItemC(
                     center = KeyC("1", size = LARGE),
                     topLeft = COMPOSE_KEY,
-                    top = DIAERESIS_KEY,
-                    topRight = TILDE_KEY,
-                    bottom = CEDILLA_KEY,
                     bottomLeft = KeyC("$"),
                     right = KeyC("-"),
                     bottomRight =
@@ -368,9 +365,9 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_NUMERIC =
                 ),
                 KeyItemC(
                     center = KeyC("2", size = LARGE),
-                    topLeft = GRAVE_KEY,
-                    top = CIRCUMFLEX_KEY,
-                    topRight = ACUTE_KEY,
+                    topLeft = KeyC("`"),
+                    top = KeyC("^"),
+                    topRight = KeyC("´"),
                     right = KeyC("!"),
                     bottomRight = KeyC("\\"),
                     bottomLeft = KeyC("/"),
@@ -378,8 +375,10 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_NUMERIC =
                 ),
                 KeyItemC(
                     center = KeyC("3", size = LARGE),
-                    topLeft = BREVE_KEY,
-                    top = CARON_KEY,
+                    topLeft = KeyC("≤"),
+                    top = KeyC("≠"),
+                    topRight = KeyC("≥"),
+                    right = KeyC("≈"),
                     left = KeyC("?"),
                     bottomRight = KeyC("€"),
                     bottomLeft = KeyC("£"),
@@ -414,7 +413,6 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_NUMERIC =
                 KeyItemC(
                     center = KeyC("7", size = LARGE),
                     topLeft = KeyC("~"),
-                    top = KeyC("^"),
                     left = KeyC("<"),
                     right = KeyC("*"),
                     bottomRight = KeyC("\t", displayText = "⇥"),
@@ -422,9 +420,7 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_NUMERIC =
                 KeyItemC(
                     center = KeyC("8", size = LARGE),
                     topLeft = KeyC("\""),
-                    top = KeyC("`"),
                     topRight = KeyC("'"),
-                    left = KeyC("´"),
                     bottomRight = KeyC(":"),
                     bottom = KeyC("."),
                     bottomLeft = KeyC(","),
@@ -434,8 +430,6 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_NUMERIC =
                     top = KeyC("&"),
                     topRight = KeyC("°"),
                     right = KeyC(">"),
-                    bottom = KeyC("¿"),
-                    bottomRight = KeyC("¡"),
                     bottomLeft = KeyC(";"),
                     left = KeyC("#"),
                 ),
