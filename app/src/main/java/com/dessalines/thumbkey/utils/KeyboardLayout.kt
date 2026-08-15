@@ -53,6 +53,7 @@ import com.dessalines.thumbkey.keyboards.KB_EN_LA_THUMBKEY
 import com.dessalines.thumbkey.keyboards.KB_EN_MARLIN
 import com.dessalines.thumbkey.keyboards.KB_EN_MESSAGEASE
 import com.dessalines.thumbkey.keyboards.KB_EN_MESSAGEASE_COMPOSE
+import com.dessalines.thumbkey.keyboards.KB_EN_MESSAGEASE_COMPOSE_COMBO
 import com.dessalines.thumbkey.keyboards.KB_EN_MESSAGEASE_COMPOSE_LEFT_FLIPPED_NUMPAD
 import com.dessalines.thumbkey.keyboards.KB_EN_MESSAGEASE_LEFT
 import com.dessalines.thumbkey.keyboards.KB_EN_MESSAGEASE_LEFT_SYMBOLS
@@ -486,4 +487,5 @@ enum class KeyboardLayout(
     RUHyperSpace(KB_RU_HYPER_SPACE), // русский hyper space
     ENThumbKeyShift(KB_EN_THUMBKEY_SHIFT), // english thumb-key shift
     TOKThumbKeyLettersShift(KB_TOK_THUMBKEY_LETTERS_SHIFT), // toki pona thumb-key letters shift
+    ENMessagEaseComposeCombo(KB_EN_MESSAGEASE_COMPOSE_COMBO), // english messagease compose combo
 }

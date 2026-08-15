@@ -45,6 +45,9 @@
   - [Slide gestures](#slide-gestures)
   - [Drag-and-return](#drag-and-return)
   - [Ghost keys](#ghost-keys)
+  - [Accents and special characters](#accents-and-special-characters)
+    - [Dead keys](#dead-keys)
+    - [Compose combo](#compose-combo)
   - [Coming from MessagEase Keyboard Tips](#coming-from-messagease-keyboard-tips)
   - [Modify keys](#modify-keys)
     - [Example 1](#example-1)
@@ -151,6 +154,44 @@ Enabling `Backspace: Allow normal swipes to work with slide gestures`, in keyboa
 ### Ghost keys
 
 Enabling `Ghost keys` in keyboard settings will enable swiping hidden symbol keys without switching to the numeric layout.
+
+### Accents and special characters
+
+Layouts with `compose` in their name can build characters that have no key of their own. There are two systems for this, and a layout may offer both at once.
+
+#### Dead keys
+
+A dead key modifies the character you have **just typed**. Type the base letter first, then swipe the dead key:
+
+| Type    | Result |
+| ------- | ------ |
+| `n` `~` | ñ      |
+| `s` `^` | ŝ      |
+| `a` `"` | ä      |
+| `s` `!` | ß      |
+
+The available dead keys are `"` `'` `` ` `` `^` `~` `°` `˘` `ˇ` `-` `!` `$` `?` `*`. Following a dead key with a space types the mark itself.
+
+Dead keys are quick, but they can only ever combine two characters, so they cannot produce symbols that are not an accented letter.
+
+#### Compose combo
+
+The compose key (`⎄`) works like the compose key on a desktop Linux system. Press it **first**, then type a short sequence, which is replaced by a single character:
+
+| Type        | Result |
+| ----------- | ------ |
+| `⎄` `o` `c` | ©      |
+| `⎄` `s` `s` | ß      |
+| `⎄` `-` `>` | →      |
+| `⎄` `1` `2` | ½      |
+| `⎄` `e` `=` | €      |
+| `⎄` `"` `a` | ä      |
+
+Because the sequence is opened by the compose key rather than closed by it, it can be any length, which is what makes characters like © reachable.
+
+While you type, the pending sequence appears underlined. Backspace steps back through it one character at a time, and a sequence that matches nothing is committed as the plain characters you typed, so nothing is ever lost.
+
+Sequences follow the X11 compose table where one exists, so habits carry over from desktop Linux. The full list lives in `ComposeComboTable.kt`.
 
 ### Coming from MessagEase Keyboard Tips
 
