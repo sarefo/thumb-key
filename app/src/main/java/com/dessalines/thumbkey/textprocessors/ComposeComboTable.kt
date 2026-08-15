@@ -15,7 +15,7 @@ package com.dessalines.thumbkey.textprocessors
  * Sequences follow the X11 `Compose` file so muscle memory carries over from desktop Linux. See
  * https://gitlab.freedesktop.org/xorg/lib/libx11/-/blob/master/nls/en_US.UTF-8/Compose.pre
  *
- * Every sequence here either matches X11 exactly or is unused by X11. There are four deliberate
+ * Every sequence here either matches X11 exactly or is unused by X11. A few are deliberate
  * additions, each sitting alongside the X11 spelling rather than replacing it:
  *
  *  - `!=` for ≠, which programmers type without thinking (X11: `/=`, `=/`)
@@ -23,6 +23,7 @@ package com.dessalines.thumbkey.textprocessors
  *  - `00` for ∞ (X11: `88`)
  *  - `sz` for ß, the German convention (X11: `ss`)
  *  - `^n` for ⁿ (X11: `^_n`)
+ *  - `ii` and `II` for the Turkish pair, easier to reach than the X11 `i.` and `I.`
  *
  * One sequence is taken over rather than left alone. X11 uses `c` followed by a letter for the
  * caron, 26 entries of which `co` is ǒ. None of that family is implemented here, and layouts
@@ -107,6 +108,16 @@ object ComposeComboTable {
             put("c/", "¢")
             put("/c", "¢")
             put("C/", "₡") // colón, per X11; the cent sign is lowercase
+
+            // Turkish dotted and dotless i. X11 treats the dot as movable rather than
+            // additive: adding it to a lowercase i takes it away, and to an uppercase I
+            // puts it on.
+            put("i.", "ı")
+            put(".i", "ı")
+            put("ii", "ı")
+            put("I.", "İ")
+            put(".I", "İ")
+            put("II", "İ")
 
             // Ligatures and standalone letters
             put("ss", "ß")

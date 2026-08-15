@@ -24,9 +24,7 @@ import com.dessalines.thumbkey.utils.SwipeNWay.*
 // Spanish, Romanian and the caron languages.
 //
 // They are drawn with the spacing-modifier glyphs rather than plain ASCII, so the tilde and
-// circumflex dead keys are visibly not the ordinary ~ and ^ that sit together on T. The cedilla
-// uses a dotted circle, the standard way of showing a combining mark, because the bare glyph
-// sits on the baseline and clips out of the key.
+// circumflex dead keys are visibly not the ordinary ~ and ^ that sit together on T.
 //
 // They use NormalizeLastKey, which appends a combining mark and normalizes, so they work on any
 // letter with a precomposed form rather than only the ones in a hand-written table.
@@ -64,7 +62,7 @@ private val DIAERESIS_KEY =
 
 private val CEDILLA_KEY =
     KeyC(
-        display = KeyDisplay.TextDisplay("◌̧"),
+        display = KeyDisplay.TextDisplay("¸"),
         action = NormalizeLastKey("\u0327"),
         color = MUTED,
     )
@@ -203,6 +201,8 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_MAIN =
                     top = KeyC("&", color = MUTED),
                     topRight = KeyC("°", color = MUTED),
                     right = KeyC(">", color = MUTED),
+                    bottom = KeyC("¿", color = MUTED),
+                    bottomRight = KeyC("¡", color = MUTED),
                     bottomLeft = KeyC(";", color = MUTED),
                     left = KeyC("#", color = MUTED),
                 ),
@@ -324,6 +324,8 @@ val KB_EN_MESSAGEASE_COMPOSE_COMBO_SHIFTED =
                     top = KeyC("&", color = MUTED),
                     topRight = KeyC("°", color = MUTED),
                     right = KeyC(">", color = MUTED),
+                    bottom = KeyC("¿", color = MUTED),
+                    bottomRight = KeyC("¡", color = MUTED),
                     bottomLeft = KeyC(";", color = MUTED),
                     left = KeyC("#", color = MUTED),
                 ),
