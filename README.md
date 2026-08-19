@@ -205,6 +205,16 @@ The compose key (`♫`) works like the compose key on a desktop Linux system. Pr
 
 Sequences follow the [X11 compose table](https://gitlab.freedesktop.org/xorg/lib/libx11/-/blob/master/nls/en_US.UTF-8/Compose.pre), so habits carry over from desktop Linux. Many characters have more than one spelling, and both orders usually work: © is `o` `c` or `c` `o`. The full list lives in `ComposeComboTable.kt`.
 
+Dashes are the one place Thumb-Key parts company with X11. The em dash is `♫` `-` `-` rather than the three-tap `---`, since it is the one people reach for most:
+
+| Type                             | Result |
+| -------------------------------- | ------ |
+| `♫` `-` `-`                       | —      |
+| `♫` `-` `m` or `♫` `m` `-`         | —      |
+| `♫` `-` `n` or `♫` `n` `-`         | –      |
+
+The `m` and `n` spellings are named after the printer's em and en, and give the en dash a spelling that does not depend on counting hyphens. The X11 `---` and `--.` do not work here: once `-` `-` resolves, nothing longer starting with it can be reached.
+
 Mathematical and technical characters are covered too:
 
 | Type        | Result | Type        | Result |

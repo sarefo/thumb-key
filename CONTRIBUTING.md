@@ -89,7 +89,7 @@ Adding a set for your field:
    letter-first spellings of © and ® are `CO` and `RO`.
 4. **Keep the table prefix-free.** A match is committed the moment it is found, so if `ab` is a
    sequence then `abc` can never be reached. This is why `..` gives … and there is no `...`, and
-   why `--` is not a sequence even though `---` and `--.` are.
+   why taking `--` for the em dash rules out the X11 spellings `---` and `--.`.
 5. **Add the group under its own comment block**, so the table stays readable as it grows.
 
 ```kotlin

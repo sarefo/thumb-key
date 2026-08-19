@@ -9,8 +9,8 @@ package com.dessalines.thumbkey.textprocessors
  * to a base letter, so a dead key cannot express them.
  *
  * The table must stay **prefix-free**: no sequence may be a proper prefix of another, because
- * a match is committed as soon as it is found. `--` is therefore not a sequence of its own,
- * even though `---` and `--.` both exist.
+ * a match is committed as soon as it is found. `..` is therefore … and there can be no `...`,
+ * and `--` is the em dash, so nothing longer may start with it.
  *
  * Sequences follow the X11 `Compose` file so muscle memory carries over from desktop Linux. See
  * https://gitlab.freedesktop.org/xorg/lib/libx11/-/blob/master/nls/en_US.UTF-8/Compose.pre
@@ -24,8 +24,15 @@ package com.dessalines.thumbkey.textprocessors
  *  - `sz` for ß, the German convention (X11: `ss`)
  *  - `^n` for ⁿ (X11: `^_n`)
  *  - `ii` and `II` for the Turkish pair, easier to reach than the X11 `i.` and `I.`
+ *  - `-m`, `m-`, `-n` and `n-` for the dashes, named after the printer's em and en
  *
- * One sequence is taken over rather than left alone. X11 uses `c` followed by a letter for the
+ * The dashes are the one place where an X11 spelling is dropped rather than joined. X11 has `---`
+ * for — and `--.` for –, which on a phone means three deliberate taps for the commoner of the two.
+ * Here `--` is the em dash outright, which costs the X11 pair: once `--` resolves, no sequence
+ * starting with `--` can ever be reached. The en dash keeps a spelling of its own in `-n` and `n-`,
+ * with `-m` and `m-` alongside `--` for symmetry.
+ *
+ * One further sequence is taken over rather than left alone. X11 uses `c` followed by a letter for the
  * caron, 26 entries of which `co` is ǒ. None of that family is implemented here, and layouts
  * with a caron dead key can write ǒ as `o` plus the dead key, so `co` is used for © instead —
  * the spelling people reach for first. Adding the X11 caron family later would mean giving `co`
@@ -50,8 +57,11 @@ object ComposeComboTable {
             put("p!", "¶")
             put("%o", "‰")
             put("..", "…")
-            put("---", "—")
-            put("--.", "–")
+            put("--", "—") // X11 spells this `---`; see the note above
+            put("-m", "—")
+            put("m-", "—")
+            put("-n", "–") // X11 spells the en dash `--.`
+            put("n-", "–")
             put("<<", "«")
             put(">>", "»")
             put("!!", "¡")
